@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+</head>
+
+<body>
+    <h2>Stopwatch</h2>
+    <div style="margin-bottom: 10px; font-size: 40px; font-family: Segoe UI;">
+        <span id="minute">0</span>
+        <span>:</span>
+        <span id="second">0</span>
+        <span>:</span>
+        <span id="mili-second">00</span>
+    </div>
+    <input id="button-start" type="button" value="Start">
+    <input id="button-stop" type="button" value="Stop">
+    <input id="button-reset" type="button" value="Reset">
+
+    <script>
+        var start = document.getElementById('button-start');
+        console.log(start);
+        var stop = document.getElementById('button-stop');
+        var reset = document.getElementById('button-reset');
+        var milisecond = document.getElementById('mili-second');
+        var second = document.getElementById('second');
+        var minute = document.getElementById('minute');
+        var mili = 0;
+        var sec = 0;
+        var min = 0;
+        var Interval;
+        start.onclick = () => {
+            clearInterval(Interval);
+            Interval = setInterval(startTime, 10);
+        }
+        startTime = () => {
+            milisecond.innerText = mili++;
+            second.innerText = sec;
+            minute.innerText = min;
+            if (mili == 100) {
+                mili = 0;
+                sec++;
+                if (sec == 60) {
+                    sec = 0;
+                    min++;
+                }
+            }
+        }
+        stop.onclick = () => {
+            clearInterval(Interval);
+        }
+        reset.onclick = () => {
+            clearInterval(Interval);
+            mili = "00";
+            sec = 0;
+            min = 0;
+            milisecond.innerText = mili;
+            second.innerText = sec;
+            minute.innerText = min;
+        }
+    </script>
+</body>
+
+</html>
